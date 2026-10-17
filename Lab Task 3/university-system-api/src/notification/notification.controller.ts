@@ -1,5 +1,5 @@
 
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { NotificationService } from './notification.service.js';
 
 @Controller('notification')
@@ -8,8 +8,23 @@ export class NotificationController {
         private readonly notificationService: NotificationService,
     ) { }
 
-    @Get('enrollment-info')
-    getEnrollmentInfo() {
-        return this.notificationService.getEnrollmentInfo();
+    @Post('send')
+    sendNotification(
+        @Body() body: { studentName: string; message: string },
+    ) {
+        return this.notificationService.sendNotification(
+            body.studentName,
+            body.message,
+        );
+    }
+
+    @Post('check')
+    checkEnrollmentAndNotify(
+        @Body() body: { studentName: string; courseId: string },
+    ) {
+        return this.notificationService.checkEnrollmentAndNotify(
+            body.studentName,
+            body.courseId,
+        );
     }
 }

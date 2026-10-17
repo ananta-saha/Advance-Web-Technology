@@ -1,9 +1,5 @@
 
-import {
-    Injectable,
-    Inject,
-    forwardRef,
-} from '@nestjs/common';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { EnrollmentService } from '../enrollment/enrollment.service.js';
 
 @Injectable()
@@ -13,13 +9,22 @@ export class NotificationService {
         private readonly enrollmentService: any,
     ) { }
 
-    sendNotification() {
+    sendNotification(studentName: string, message: string) {
         return {
             message: 'Notification sent successfully',
+            student: studentName,
+            notification: message,
         };
     }
 
-    getEnrollmentInfo() {
-        return this.enrollmentService.getAllEnrollments();
+    checkEnrollmentAndNotify(studentName: string, courseId: string) {
+        const enrollments = this.enrollmentService.getEnrollments();
+
+        return {
+            message: 'Enrollment status checked',
+            student: studentName,
+            courseId,
+            enrollments,
+        };
     }
 }

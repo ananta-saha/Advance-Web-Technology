@@ -1,5 +1,5 @@
 
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service.js';
 
 @Controller('enrollment')
@@ -8,19 +8,23 @@ export class EnrollmentController {
         private readonly enrollmentService: EnrollmentService,
     ) { }
 
+    @Get()
+    getEnrollments() {
+        return this.enrollmentService.getEnrollments();
+    }
+
     @Get('courses')
     getCoursesForEnrollment() {
         return this.enrollmentService.getCoursesForEnrollment();
     }
 
-    @Get()
-    getAllEnrollments() {
-        return this.enrollmentService.getAllEnrollments();
+    @Post()
+    enrollStudent(
+        @Body() body: { studentName: string; courseId: string },
+    ) {
+        return this.enrollmentService.enrollStudent(
+            body.studentName,
+            body.courseId,
+        );
     }
-
-    @Get('create')
-    createEnrollment() {
-        return this.enrollmentService.createEnrollment();
-    }
-
 }

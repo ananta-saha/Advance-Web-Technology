@@ -11,23 +11,34 @@ export class EnrollmentService {
         private readonly notificationService: any,
     ) { }
 
-    getAllEnrollments() {
+    getEnrollments() {
         return {
             message: 'All enrollments fetched',
             data: [],
         };
     }
 
-    getCoursesForEnrollment() {
-        return this.courseService.getAllCourses();
-    }
+    enrollStudent(studentName: string, courseId: string) {
+        const course = this.courseService.getCourseById(courseId);
 
-    createEnrollment() {
-        const notification = this.notificationService.sendNotification();
+        const notification = this.notificationService.sendNotification(
+            studentName,
+            'Enrollment successful!',
+        );
 
         return {
-            message: 'Enrollment created',
+            message: 'Student enrolled successfully',
+            student: studentName,
+            course,
             notification,
         };
+    }
+
+    getAllEnrollments() {
+        return this.getEnrollments();
+    }
+
+    getCoursesForEnrollment() {
+        return this.courseService.getAllCourses();
     }
 }
