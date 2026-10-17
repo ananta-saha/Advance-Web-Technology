@@ -12,4 +12,15 @@ export class EnrollmentController {
     getCoursesForEnrollment() {
         return this.enrollmentService.getCoursesForEnrollment();
     }
+
+    @Get()
+    getAllEnrollments() {
+        return this.enrollmentService.getAllEnrollments();
+    }
+
+    @Get('create')
+    createEnrollment() {
+        return this.enrollmentService.createEnrollment();
+    }
+
 }
