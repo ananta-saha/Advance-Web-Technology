@@ -4,21 +4,21 @@ import { Type } from "class-transformer";
 export class CreateCourseDto {
     @IsString()
     @IsNotEmpty()
-    @Matches(/\s/, {
+    @Matches(/\S/, {
         message: 'name cannot empty',
     })
     name: string;
 
     @IsString()
     @IsNotEmpty()
-    @Matches(/\s/, {
+    @Matches(/\S/, {
         message: 'code cannot be blank',
     })
     code: string;
 
     @IsString()
     @IsNotEmpty()
-    @Matches(/\s/, {
+    @Matches(/\S/, {
         message: 'instructor cannot be empty '
     })
     instructor: string
