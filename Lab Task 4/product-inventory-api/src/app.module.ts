@@ -16,7 +16,5 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     synchronize: true,
   }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule { }
